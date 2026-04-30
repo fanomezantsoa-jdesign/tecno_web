@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <video src="video.mp4" controls></video>
+    <button onclick="downloadVideo('video.mp4')">Télécharger</button>
+    <script>
+        const container = document.getElementById("downloads");
+
+        let downloads = JSON.parse(localStorage.getItem("downloads")) || [];
+
+        downloads.forEach(video => {
+            const el = document.createElement("video");
+            el.src = video;
+            el.controls = true;
+            el.style.width = "300px";
+            container.appendChild(el);
+        });
+    </script>
+</body>
+</html>
