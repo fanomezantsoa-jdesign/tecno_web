@@ -120,7 +120,15 @@ video{
     width:100%;
     height:200px;
     overflow: hidden;
-
+}
+/*Flouter la video sur le preview*/
+.preview-video{
+    filter:blur;
+    transition: filter 0.3s ease;
+    width: 100%;
+}
+.preview-video:hover{
+    filter: blur(0);
 }
 
 .texte{
