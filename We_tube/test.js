@@ -27,3 +27,4 @@ function downloadVideo(btn) {
 }
 
 //Défilement rapide de video//
+const
