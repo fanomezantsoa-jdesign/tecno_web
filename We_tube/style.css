@@ -112,9 +112,9 @@ li i{
     overflow: hidden;
 }
 .video1:hover{
-    transform: translateY(5px);
+    transform: translateY(-8px);
     border: 2px rgb(85, 82, 82) solid;
-
+     transition: 0.8s;
 }
 video{
     width:100%;
