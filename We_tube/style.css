@@ -84,6 +84,12 @@ input{
 .recherche{
     position:relative;
     margin-bottom: 20px;
+    border: 2px #032c77 solid;
+    color: white;
+}
+.recherche:hover{
+    background-color: white;
+    color: black;
 }
 li i{
     position: absolute;
