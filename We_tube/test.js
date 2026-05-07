@@ -1,4 +1,3 @@
-//Téléchargement video//
 const videos = document.querySelectorAll(".preview-video");
 
 videos.forEach(video => {
@@ -26,5 +25,22 @@ function downloadVideo(btn) {
   }
 }
 
-//Défilement rapide de video//
-const
+
+// barre de recherche
+// Récupère ce que l'utilisateur entre
+const input = document.querySelector('input');
+const video1  = document.querySelectorAll('.video1');
+
+input.addEventListener('input',(e)=>{
+    let content = e.target.value;
+video1.forEach((vide)=>{
+    if(vide.textContent.indexOf(content)>=0){
+      vide.style.display="";
+    }
+    else{
+      vide.style.display="none";
+
+    }
+})
+
+})
