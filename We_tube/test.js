@@ -1,3 +1,4 @@
+//Téléchargement video//
 const videos = document.querySelectorAll(".preview-video");
 
 videos.forEach(video => {
@@ -24,3 +25,5 @@ function downloadVideo(btn) {
     alert("Ajouté aux téléchargements !");
   }
 }
+
+//Défilement rapide de video//
