@@ -84,6 +84,12 @@ input{
 .recherche{
     position:relative;
     margin-bottom: 20px;
+    border: 2px #032c77 solid;
+    color: white;
+}
+.recherche:hover{
+    background-color: white;
+    color: black;
 }
 li i{
     position: absolute;
@@ -114,9 +120,9 @@ li i{
 
 }
 .video1:hover{
-    transform: translateY(5px);
+    transform: translateY(-8px);
     border: 2px rgb(85, 82, 82) solid;
-
+     transition: 0.8s;
 }
 video{
     width: 100%;
@@ -124,9 +130,21 @@ video{
     bottom: 0px;
     left: 0px;
     overflow: hidden;
+<<<<<<< HEAD
     position: absolute;
     bottom: 50px;
 
+=======
+}
+/*Flouter la video sur le preview*/
+.preview-video{
+    filter:blur;
+    transition: filter 0.3s ease;
+    width: 100%;
+}
+.preview-video:hover{
+    filter: blur(0);
+>>>>>>> c32a2eb80af44e968bf6b770ae6b5743d40b5d27
 }
 
 .texte{
