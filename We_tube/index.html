@@ -10,39 +10,22 @@
 </head>
 <body>
     <header>
-        <!-- Barre de navigation haute -->
-    <nav class="navbar">
-        <div class="left-section">
-            <i class="fas fa-bars" id="menu-icon"></i>
-            <span class="logo">We_<b>tub</b></span>
-        </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Rechercher">
-            <button><i class="fas fa-search"></i></button>
-        </div>
-    </nav>
-
-    <!-- Menu latéral (Sidebar) -->
-    <aside class="sidebar" id="sidebar">
-        <div class="nav-link active"><i class="fas fa-home"></i> <span>Accueil</span></div>
-        <div class="nav-link"><i class="fab fa-youtube"></i> <span>Shorts</span></div>
-        <div class="nav-link"><i class="fas fa-subscriptions"></i> <span>Abonnements</span></div>
-        <hr>
-        <div class="nav-link"><i class="fas fa-history"></i> <span>Historique</span></div>
-        <div class="nav-link"><i class="fas fa-video"></i> <span>Vos vidéos</span></div>
-    </aside>
         <nav class="navbar">
             <ul class="tete">
                 <img class="image" src="Gemini_Generated_Image_xc2elaxc2elaxc2e-removebg-preview.png" alt="#">
                 <h1 class="logo"><span>We</span>tube</h1>
             </ul>
-            <ul class="menu">
+            <button class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="menu" id="menu">
                 <li class="recherche"><input type="search" id="search" placeholder="Recherche">
                     <i class="fa-solid fa-magnifying-glass" muted loop class="preview-video"></i>
                 </li>
                 <li><a href="telechargement.html">Telechargements</a></li>
                  <li><a href="login.html">Connexion</a></li>
-            </ul>
+                <li><a href="register.html">Inscription</a></li>
+            </ul> 
         </nav>
     </header>
     <main class="corps">
@@ -174,6 +157,20 @@
             <p>&copy2026 all right reserved.</p>
         </div>
     </footer>
+    
+    <!-- Modal pour lecture vidéo en plein écran -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-video-container">
+                <video id="modalVideo" controls autoplay>
+                    <source id="modalVideoSource" src="" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture vidéo.
+                </video>
+            </div>
+        </div>
+    </div>
+    
     <script src="test.js"></script>
 </body>
 </html>

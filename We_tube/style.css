@@ -5,6 +5,15 @@ body{
 header{
     display: flex;
     flex-wrap: wrap;
+    position: fixed; /* Header fixe */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(3, 30, 82, 0.95); /* Fond semi-transparent */
+    backdrop-filter: blur(10px); /* Effet de flou */
+    min-height: 120px;
+    box-sizing: border-box;
 }
 .tete{
     position: relative;
@@ -40,6 +49,8 @@ h1{
     padding:15px 40px;
     width:100%;
     transition:1.4s;
+    position: relative;
+    z-index: 1001;
 }
 .navbar ul{
     justify-content:end;
@@ -73,6 +84,15 @@ h1{
     border-radius:5px;
 }
 
+@media (max-width: 768px) {
+    .menu a:hover {
+        background-color: rgba(10, 99, 242, 0.2);
+        color: white;
+        padding: 15px 35px;
+        border-radius: 0;
+    }
+}
+
 input{
     border-radius: 20px;
     height: 40px;
@@ -87,10 +107,7 @@ input{
     border: 2px #032c77 solid;
     color: white;
 }
-.recherche:hover{
-    background-color: white;
-    color: black;
-}
+
 li i{
     position: absolute;
     left: 270px;
@@ -100,74 +117,119 @@ li i{
 .corps{
     flex: 1;
     background-color:black;
-    padding-top: 50px;
-    overflow-y: scroll;
+    padding-top: 160px; /* Espace pour le header fixe */
+    padding-bottom: 120px; /* Espace pour le footer fixe */
+    overflow-y: auto; /* Scroll vertical activé */
+    min-height: calc(100vh - 280px); /* Hauteur ajustée pour header + footer */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .ligne1{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     padding-bottom: 20px;
     justify-content: center;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 1700px;
+}
+
+.corps.sidebar-active .ligne1 {
+    justify-content: flex-start;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .video1{
     border: 2px #1e293b solid;
     border-radius: 30px;
-    width: 400px;
-    height: 250px;
+    width: 100%;
+    max-width: 400px;
+    height: 225px; /* Ratio 16:9 pour YouTube */
     overflow: hidden;
     position: relative;
-
+    transition: all 0.3s ease;
 }
 .video1:hover{
     transform: translateY(-8px);
     border: 2px rgb(85, 82, 82) solid;
      transition: 0.8s;
 }
+
+.corps.sidebar-active .video1 {
+    width: 200px; /* Réduit de 250px à 200px */
+    height: 112px; /* Ratio 16:9 maintenu: 200 * 9 / 16 = 112.5 */
+}
 video{
     width: 100%;
-    height:230px;
-    bottom: 0px;
-    left: 0px;
-    overflow: hidden;
-<<<<<<< HEAD
+    height: 100%;
+    object-fit: cover;
     position: absolute;
-    bottom: 50px;
-
-=======
+    top: 0;
+    left: 0;
 }
 /*Flouter la video sur le preview*/
 .preview-video{
     filter:blur;
     transition: filter 0.3s ease;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
 }
 .preview-video:hover{
     filter: blur(0);
->>>>>>> c32a2eb80af44e968bf6b770ae6b5743d40b5d27
 }
 
 .texte{
     position: absolute;
-    /* top: 12em; */
-    bottom: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    height: 25%;
-    background-color: rgb(43, 42, 42);
+    height: 30%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.texte p {
+    margin: 0;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.texte button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 190px;
-    padding: 0 2em;
-    button{
-        background-color: transparent;
-        font-size: 1.5em;
-        color: white;
-        border: none;
-    }
+    margin-left: 10px;
 }
-button:hover{
-    color: #031e52;
+
+.texte button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
 }
 .pied{
     background-color: #031e52;
@@ -176,4 +238,404 @@ button:hover{
     padding: 20px;
     border-radius: 20px;
     margin-top: 20px;
+    position: fixed; /* Footer fixe */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+/* Hamburger Menu Styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger:hover {
+    color: #0a63f2;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        position: relative;
+        flex-wrap: nowrap;
+        padding: 15px 20px;
+    }
+
+    .tete {
+        flex-shrink: 0;
+    }
+
+    .hamburger {
+        display: flex;
+        margin-left: auto;
+    }
+
+    .menu {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: #031e52;
+        flex-direction: column;
+        width: auto;
+        min-width: 250px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out;
+        border-radius: 0 0 0 10px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+
+    .menu.active {
+        max-height: 500px;
+        padding: 15px 0;
+    }
+
+    .menu li {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .menu li:last-child {
+        border-bottom: none;
+    }
+
+    .menu a {
+        display: block;
+        padding: 15px 25px;
+        border-radius: 0;
+        color: white;
+        text-decoration: none;
+        transition: 0.3s;
+        font-weight: 500;
+    }
+
+    .menu a:hover {
+        background-color: rgba(10, 99, 242, 0.2);
+        padding-left: 35px;
+    }
+
+    .recherche {
+        padding: 15px 25px;
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+    }
+
+    input {
+        width: 100%;
+        max-width: 280px;
+        height: 40px;
+        padding-right: 40px;
+    }
+
+    .recherche i {
+        position: absolute;
+        right: 35px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 12px 15px;
+    }
+
+    .tete {
+        width: 80px;
+        padding: 0.5em;
+    }
+
+    .image {
+        width: 60px;
+        right: 65px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .hamburger {
+        font-size: 20px;
+    }
+
+    .menu li {
+        padding: 0;
+    }
+
+    .menu a {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .menu a:hover {
+        padding-left: 30px;
+    }
+
+    .recherche {
+        padding: 12px 20px;
+    }
+
+    input {
+        width: 100%;
+        max-width: 240px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    li i {
+        left: 35%;
+    }
+
+    .video1 {
+        width: 100%;
+        max-width: 320px;
+        height: 180px; /* Ratio 16:9: 320 * 9 / 16 = 180 */
+    }
+
+    .texte {
+        height: 35%;
+        padding: 10px;
+    }
+
+    .texte p {
+        font-size: 12px;
+    }
+
+    .texte button {
+        font-size: 1em;
+        padding: 6px;
+    }
+
+    video {
+        height: 100%; /* Remplit complètement le conteneur */
+        object-fit: cover;
+    }
+    }
+
+
+/* Modal Styles - Sidebar à gauche */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal-content {
+    position: fixed;
+    left: 0;
+    top: 120px; /* Commencer après le header fixe */
+    width: 75%; /* Réduit de 90% à 75% */
+    max-width: 600px; /* Réduit de 700px à 600px */
+    height: calc(100vh - 220px); /* Hauteur ajustée pour header + footer */
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal.active .modal-content {
+    transform: translateX(0);
+}
+
+.close {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close:hover {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.3);
+    transform: scale(1.1);
+}
+
+.modal-video-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px; /* Réduit de 10px à 5px */
+}
+
+#modalVideo {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Styles pour les contrôles vidéo */
+#modalVideo::-webkit-media-controls-panel {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 0 0 8px 8px;
+}
+
+#modalVideo::-webkit-media-controls {
+    padding: 5px;
+}
+
+#modalVideo::-webkit-media-controls-play-button,
+#modalVideo::-webkit-media-controls-pause-button {
+    width: 40px;
+    height: 40px;
+}
+
+#modalVideo::-webkit-media-controls-timeline {
+    height: 8px;
+    margin: 0 10px;
+}
+
+#modalVideo::-webkit-media-controls-volume-slider {
+    width: 60px;
+    height: 6px;
+}
+
+/* Layout principal avec sidebar */
+.corps {
+    flex: 1;
+    background-color: black;
+    padding-top: 50px;
+    transition: margin-left 0.3s ease, padding-left 0.3s ease;
+}
+
+.corps.sidebar-active {
+    margin-left: 75%; /* Ajusté pour correspondre à la nouvelle largeur */
+    max-width: calc(100% - 75%);
+}
+
+/* Responsive */
+@media (min-width: 1200px) {
+    .modal-content {
+        width: 75%;
+        max-width: 700px; /* Ajusté pour correspondre */
+    }
+    
+    .corps.sidebar-active {
+        margin-left: 75%;
+        max-width: calc(100% - 75%);
+    }
+    
+    .corps.sidebar-active .video1 {
+        width: 400px; /* Taille normale sur grands écrans aussi */
+        height: 225px; /* Ratio 16:9 maintenu */
+    }
+}
+
+@media (max-width: 1024px) {
+    .modal-content {
+        width: 55%; /* Ajusté pour correspondre au nouveau ratio */
+        max-width: 450px;
+    }
+    
+    .corps.sidebar-active {
+        margin-left: 55%;
+        max-width: calc(100% - 55%);
+    }
+    
+    .corps.sidebar-active .video1 {
+        width: 400px; /* Garde la taille normale */
+        height: 225px; /* Ratio 16:9 maintenu */
+    }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 100%;
+        max-width: none;
+        top: 100px; /* Header plus petit sur mobile */
+        height: calc(100vh - 180px); /* Ajusté pour header + footer mobiles */
+    }
+    
+    .corps.sidebar-active {
+        margin-left: 0;
+        padding-left: 0;
+    }
+    
+    .close {
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        font-size: 20px;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        top: 80px;
+        height: calc(100vh - 160px);
+    }
+    
+    .close {
+        font-size: 18px;
+        width: 28px;
+        height: 28px;
+        right: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    .corps {
+        padding-top: 130px;
+        padding-bottom: 80px;
+        min-height: calc(100vh - 210px);
+    }
+}
+
+@media (max-width: 480px) {
+    .corps {
+        padding-top: 120px;
+        padding-bottom: 70px;
+        min-height: calc(100vh - 190px);
+    }
 }
